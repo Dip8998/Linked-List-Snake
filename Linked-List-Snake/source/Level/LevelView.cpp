@@ -7,11 +7,12 @@ namespace Level {
 	}
 
 	LevelView::~LevelView() {
-
+		destroy();
 	}
 
 	void LevelView::createViews() {
 		background_rectangle = new UI::UIElement::RectangleShapeView();
+		border_rectangle = new UI::UIElement::RectangleShapeView();
 	}
 
 	void LevelView::initialize() {
