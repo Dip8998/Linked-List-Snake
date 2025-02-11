@@ -1,9 +1,11 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
-#include "../../include/Player/Direction.h"
+#include "Player/Direction.h"
+#include "LinkedList/SingleLinkedList.h"
 
 namespace Player
 {
+	using namespace LinkedList;
 	enum class SnakeState
 	{
 		ALIVE,
@@ -20,6 +22,9 @@ namespace Player
 
 		SnakeState current_snake_state;
 		Direction current_snake_direction;
+
+		SingleLinkedList* single_linked_list;
+		void createLinkedList();
 
 		void processPlayerInput();
 		void updateSnakeDirection();

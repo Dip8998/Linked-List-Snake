@@ -32,6 +32,10 @@ namespace Player {
 		bodypart_image->setOriginAtCentre();
 	}
 
+	void BodyPart::render() {
+		bodypart_image->render();
+	}
+
 	sf::Vector2f BodyPart::getBodyPartScreenPosition()
 	{
 		float x_screen_position = Level::LevelView::border_offset_left + (grid_position.x * bodypart_width) + (bodypart_width / 2);
@@ -105,15 +109,17 @@ namespace Player {
 		grid_position = position;
 	}
 
+	Direction BodyPart::getDirection()
+	{
+		return direction;
+	}
+
 	sf::Vector2i BodyPart::getPosition()
 	{
 		return grid_position;
 	}
 
-	void BodyPart::render() {
-		bodypart_image->render();
-	}
-
+	
 	void BodyPart::destroy() {
 		delete bodypart_image;
 	}
