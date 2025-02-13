@@ -12,6 +12,12 @@ namespace Player
 		DEAD,
 	};
 
+	enum class InputState
+	{
+		WAITING,
+		PROCESSING
+	};
+
 	class SnakeController
 	{
 	private:
@@ -27,6 +33,7 @@ namespace Player
 
 		SnakeState current_snake_state;
 		Direction current_snake_direction;
+		InputState current_input_state;
 
 		SingleLinkedList* single_linked_list;
 		void createLinkedList();
