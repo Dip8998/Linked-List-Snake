@@ -23,10 +23,12 @@ namespace Level {
 
 	void LevelView::update() {
 		background_rectangle->update();
+		border_rectangle->update();
 	}
 
 	void LevelView::render() {
 		background_rectangle->render();
+		border_rectangle->render();
 	}
 
 	void LevelView::initializeBackground()
@@ -60,6 +62,7 @@ namespace Level {
 
 	void LevelView::destroy() {
 		delete(background_rectangle);
+		delete(border_rectangle);
 	}
 
 	float LevelView::getGridWidth()
