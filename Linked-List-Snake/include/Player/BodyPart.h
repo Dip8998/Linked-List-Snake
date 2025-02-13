@@ -22,7 +22,6 @@ namespace Player {
 		sf::Vector2f getBodyPartScreenPosition();
 		float getRotateAngle();
 
-		sf::Vector2i getNextPosition();
 		sf::Vector2i getNextPositionDown();
 		sf::Vector2i getNextPositionUp();
 		sf::Vector2i getNextPositionRight();
@@ -42,6 +41,7 @@ namespace Player {
 		void setPosition(sf::Vector2i position);
 		Direction getDirection();
 		sf::Vector2i getPosition();
+		sf::Vector2i getNextPosition();
 	};
 
 }
