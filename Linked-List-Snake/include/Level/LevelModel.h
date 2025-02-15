@@ -1,6 +1,7 @@
 #pragma once 
 #include <SFML/System/Vector2.hpp>
 #include<vector>
+#include "Element/ElementData.h"
 #include "../../include/Level/LevelData.h"
 
 namespace Level {
@@ -11,6 +12,12 @@ namespace Level {
 
 		float cell_width;
 		float cell_height;
+
+		std::vector<Element::ElementData> level_one_element_list;
+		std::vector<Element::ElementData> level_two_element_list;
+		std::vector<LevelData> level_configurations;
+		void initializeLevelData();
+
 
 	public:
 
@@ -23,6 +30,10 @@ namespace Level {
 		void initialize(int width, int height);
 		float getCellWidth();
 		float getCellHeight();
+
+		void initializeLevelData();
+
+		const std::vector<Element::ElementData>& getElementDataList(int level_to_load);
 
 	};
 
