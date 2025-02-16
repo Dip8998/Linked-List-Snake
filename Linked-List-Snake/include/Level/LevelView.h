@@ -1,4 +1,4 @@
-#pragma onceh
+#pragma once
 #include<SFML/Graphics.hpp>
 #include "UI/UIElement/RectangleShapeView.h"
 
