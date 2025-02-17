@@ -1,5 +1,6 @@
 #include "../../include/Player/SnakeController.h"
 #include "Global/ServiceLocator.h"
+#include "Sound/SoundService.h"
 #include "Event/EventService.h"
 
 namespace Player {
@@ -88,12 +89,31 @@ namespace Player {
 	{
 		single_linked_list->updateNodePosition();
 	}
+
 	void SnakeController::processSnakeCollision()
+	{
+		processBodyCollision();
+		processElementsCollision();
+		processFoodCollision();
+	}
+
+	void SnakeController::processBodyCollision()
 	{
 		if (single_linked_list->processNodeCollision())
 		{
 			current_snake_state = SnakeState::DEAD;
+			Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::DEATH);
 		}
+	}
+
+	void SnakeController::processElementsCollision()
+	{
+
+	}
+
+	void SnakeController::processFoodCollision()
+	{
+
 	}
 	void SnakeController::handleRestart()
 	{
