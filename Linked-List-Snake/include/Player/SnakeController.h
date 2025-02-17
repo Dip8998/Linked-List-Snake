@@ -39,6 +39,7 @@ namespace Player
 		void createLinkedList();
 
 		void processPlayerInput();
+		
 		void updateSnakeDirection();
 		void moveSnake();
 		void processSnakeCollision();
@@ -60,6 +61,8 @@ namespace Player
 		void setSnakeState(SnakeState state);
 		SnakeState getSnakeState();
 		void delayedUpdate();
+
+		std::vector<sf::Vector2i> getCurrentSnakePositionList();
 	};
 
 }

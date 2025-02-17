@@ -21,6 +21,7 @@ namespace LinkedList {
 		sf::Vector2i getNewNodePosition(Node* reference_node);
 
 
+
 	public:
 		SingleLinkedList();
 		~SingleLinkedList();
@@ -34,6 +35,8 @@ namespace LinkedList {
 		bool processNodeCollision();
 		void removeNodeAtHead();
 		void removeAllNodes();
+
+		std::vector<sf::Vector2i> getNodesPositionList();
 	};
 
 }
