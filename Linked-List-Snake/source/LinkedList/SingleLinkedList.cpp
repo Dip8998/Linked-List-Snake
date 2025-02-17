@@ -132,6 +132,12 @@ namespace LinkedList
 		return false;
 	}
 
+	Node* SingleLinkedList::getHeadNode()
+	{
+		return head_node;
+	}
+
+
 	void SingleLinkedList::removeNodeAtHead()
 	{
 		Node* cur_node = head_node;

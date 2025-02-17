@@ -7,6 +7,7 @@ namespace Sound
 	{
 		BUTTON_CLICK,
 		DEATH,
+		PICKUP,
 	};
 
 	class SoundService

@@ -2,6 +2,10 @@
 #include "Global/ServiceLocator.h"
 #include "Sound/SoundService.h"
 #include "Event/EventService.h"
+#include "Element/ElementService.h"
+#include "Food/FoodService.h"
+
+using namespace Food;
 
 namespace Player {
 
@@ -108,12 +112,65 @@ namespace Player {
 
 	void SnakeController::processElementsCollision()
 	{
+		Element::ElementService* element_service = Global::ServiceLocator::getInstance()->getElementService();
 
+		if (element_service->processElementsCollision(single_linked_list->getHeadNode()))
+		{
+			current_snake_state = SnakeState::DEAD;
+			Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::DEATH);
+		}
 	}
 
 	void SnakeController::processFoodCollision()
 	{
+		FoodService* food_service = Global::ServiceLocator::getInstance()->getFoodService();
+		FoodType food_type;
 
+		if (food_service->processFoodCollision(single_linked_list->getHeadNode(), food_type))
+		{
+			Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::PICKUP);
+
+			food_service->destroyFood();
+			OnFoodCollected(food_type);
+		}
+	}
+
+	void SnakeController::OnFoodCollected(FoodType food_type)
+	{
+		switch (food_type)
+		{
+		case FoodType::PIZZA:
+			//Insert At Tail
+			break;
+
+		case FoodType::BURGER:
+			//Insert At Head
+			break;
+
+		case FoodType::CHEESE:
+			//Insert in Middle
+			break;
+
+		case FoodType::APPLE:
+			//Delete at Head
+			break;
+
+		case FoodType::MANGO:
+			//Delete at Middle
+			break;
+
+		case FoodType::ORANGE:
+			//Delete at Tail
+			break;
+
+		case FoodType::POISION:
+			//Delete half the snake
+			break;
+
+		case FoodType::ALCOHOL:
+			//Reverse the snake
+			break;
+		}
 	}
 	void SnakeController::handleRestart()
 	{
