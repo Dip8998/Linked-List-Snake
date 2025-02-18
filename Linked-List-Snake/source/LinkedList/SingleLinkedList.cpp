@@ -12,6 +12,7 @@ namespace LinkedList
 	SingleLinkedList::~SingleLinkedList() = default;
 	void SingleLinkedList::initialize(float width, float height, sf::Vector2i position, Direction direction)
 	{
+		linked_list_size = 0;
 		node_width = width;
 		node_height = height;
 		default_position = position;
@@ -56,6 +57,20 @@ namespace LinkedList
 		new_node->body_part.initialize(node_width, node_height, position, reference_node->body_part.getDirection());
 	}
 
+	void SingleLinkedList::insertNodeAtHead()
+	{
+		linked_list_size += 1;
+		Node* new_node = createNode();
+		if (head_node == nullptr)
+		{
+			head_node = new_node;
+			initializeNode(new_node, nullptr, Operation::HEAD);
+			return;
+		}
+		initializeNode(new_node, head_node, Operation::HEAD);
+		new_node->next = head_node;
+		head_node = new_node;
+	}
 
 	std::vector<sf::Vector2i> SingleLinkedList::getNodesPositionList()
 	{
