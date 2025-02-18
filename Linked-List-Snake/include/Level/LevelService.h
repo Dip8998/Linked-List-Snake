@@ -25,7 +25,7 @@ namespace Level {
 		void spawnLevelElements(LevelNumber level_to_load);
 		void spawnPlayer();
 		void spawnFood();
-
+		LevelNumber getCurrentLevel();
 		float getCellWidth();
 		float getCellHeight();
 	};

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
-#include "Player/Direction.h"
+#include "LinkedList/Node.h"
 #include "LinkedList/SingleLinkedList.h"
 #include "Food/FoodType.h"
 
@@ -19,6 +19,27 @@ namespace Player
 		PROCESSING
 	};
 
+	enum class TimeComplexity
+	{
+		NONE,
+		ONE,
+		N,
+	};
+
+	enum class LinkedListOperations
+	{
+		NONE,
+		INSERT_AT_HEAD,
+		INSERT_AT_TAIL,
+		INSERT_AT_MID,
+		REMOVE_AT_HEAD,
+		REMOVE_AT_TAIL,
+		REMOVE_AT_MID,
+		DELETE_HALF_LIST,
+		REVERSE_LIST,
+	};
+
+
 	class SnakeController
 	{
 	private:
@@ -28,6 +49,12 @@ namespace Player
 		float restart_counter;
 
 		float elapsed_duration;
+
+		int player_score;
+
+		TimeComplexity time_complexity;
+		LinkedListOperations last_linked_list_operation;
+
 
 		const sf::Vector2i default_position = sf::Vector2i(25, 13);
 		const Direction default_direction = Direction::RIGHT;
@@ -65,6 +92,11 @@ namespace Player
 		void respawnSnake();
 		void setSnakeState(SnakeState state);
 		SnakeState getSnakeState();
+		int getPlayerScore();
+
+		TimeComplexity getTimeComplexity();
+		LinkedListOperations getLastOperation();
+
 		void delayedUpdate();
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
