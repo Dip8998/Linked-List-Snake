@@ -50,6 +50,8 @@ namespace LinkedList {
 		void removeNodeAtIndex(int index);
 		void removeNodeAtMiddle();
 
+		void removeNodeAtTail();
+
 		std::vector<sf::Vector2i> getNodesPositionList();
 		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
 		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
