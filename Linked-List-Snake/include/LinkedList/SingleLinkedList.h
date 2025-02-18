@@ -5,6 +5,13 @@
 
 namespace LinkedList {
 
+	enum class Operation
+	{
+		HEAD,
+		MID,
+		TAIL,
+	};
+
 	class SingleLinkedList {
 
 	private:
@@ -17,10 +24,6 @@ namespace LinkedList {
 		Direction default_direction;
 
 		Node* createNode();
-
-		sf::Vector2i getNewNodePosition(Node* reference_node);
-
-
 
 	public:
 		SingleLinkedList();
@@ -38,6 +41,10 @@ namespace LinkedList {
 		Node* getHeadNode();
 
 		std::vector<sf::Vector2i> getNodesPositionList();
+		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
+		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
+
 	};
+
 
 }
