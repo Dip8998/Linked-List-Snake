@@ -290,6 +290,45 @@ namespace LinkedList
 		prev_node->next = nullptr;
 	}
 
+	Direction SingleLinkedList::getReverseDirection(Direction reference_direction)
+	{
+		switch (reference_direction)
+		{
+		case Direction::UP:
+			return Direction::DOWN;
+		case Direction::DOWN:
+			return Direction::UP;
+		case Direction::LEFT:
+			return Direction::RIGHT;
+		case Direction::RIGHT:
+			return Direction::LEFT;
+		}
+	}
+	void SingleLinkedList::reverseNodeDirections()
+	{
+		Node* curr_node = head_node;
+		while (curr_node != nullptr)
+		{
+			curr_node->body_part.setDirection(getReverseDirection(curr_node->body_part.getPreviousDirection()));
+			curr_node = curr_node->next;
+		}
+	}
+	Direction SingleLinkedList::reverse()
+	{
+		Node* cur_node = head_node;
+		Node* prev_node = nullptr;
+		Node* next_node = nullptr;
+		while (cur_node != nullptr)
+		{
+			next_node = cur_node->next;
+			cur_node->next = prev_node;
+			prev_node = cur_node;
+			cur_node = next_node;
+		}
+		head_node = prev_node;
+		reverseNodeDirections();
+		return head_node->body_part.getDirection();
+	}
 
 	void SingleLinkedList::updateNodeDirection(Direction direction_to_set) {
 		Node* cur_node = head_node;

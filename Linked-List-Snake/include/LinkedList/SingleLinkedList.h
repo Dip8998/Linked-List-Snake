@@ -54,6 +54,10 @@ namespace LinkedList {
 		Node* findNodeAtIndex(int index);
 		void removeHalfNodes();
 
+		Direction getReverseDirection(Direction reference_direction);
+		void reverseNodeDirections();
+		Direction reverse();
+
 		std::vector<sf::Vector2i> getNodesPositionList();
 		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
 		void initializeNode(Node* new_node, Node* reference_node, Operation operation);

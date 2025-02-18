@@ -63,8 +63,16 @@ namespace Player {
 
 	void BodyPart::setDirection(Direction direction)
 	{
+		previous_direction = this->direction;
+
 		this->direction = direction;
 	}
+
+	Direction BodyPart::getPreviousDirection()
+	{
+		return previous_direction;
+	}
+
 
 	void BodyPart::updatePosition()
 	{
