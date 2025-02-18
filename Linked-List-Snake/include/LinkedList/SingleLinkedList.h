@@ -37,6 +37,8 @@ namespace LinkedList {
 		void insertNodeAtTail();
 		void insertNodeAtIndex(int index);
 		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
+		void insertNodeAtMiddle();
+		int findMiddleNode();
 		void updateNodeDirection(Direction direction_to_set);
 		void updateNodePosition();
 		bool processNodeCollision();
