@@ -91,4 +91,9 @@ namespace Food
 
 		return sf::Vector2f(screen_position_x, screen_position_y);
 	}
+
+	sf::Vector2i FoodItem::getFoodPosition()
+	{
+		return grid_position;
+	}
 }

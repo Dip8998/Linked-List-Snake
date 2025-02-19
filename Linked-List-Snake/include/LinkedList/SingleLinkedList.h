@@ -5,6 +5,13 @@
 
 namespace LinkedList {
 
+	enum class Operation
+	{
+		HEAD,
+		MID,
+		TAIL,
+	};
+
 	class SingleLinkedList {
 
 	private:
@@ -18,9 +25,7 @@ namespace LinkedList {
 
 		Node* createNode();
 
-		sf::Vector2i getNewNodePosition(Node* reference_node);
-
-
+		int linked_list_size;
 
 	public:
 		SingleLinkedList();
@@ -30,13 +35,36 @@ namespace LinkedList {
 		void render();
 
 		void insertNodeAtTail();
+		void insertNodeAtIndex(int index);
+		void shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node);
+		void insertNodeAtMiddle();
+		int findMiddleNode();
 		void updateNodeDirection(Direction direction_to_set);
 		void updateNodePosition();
 		bool processNodeCollision();
 		void removeNodeAtHead();
 		void removeAllNodes();
+		Node* getHeadNode();
+		void shiftNodesAfterRemoval(Node* cur_node);
+		void removeNodeAt(int index);
+		void removeNodeAtIndex(int index);
+		void removeNodeAtMiddle();
+
+		void removeNodeAtTail();
+		Node* findNodeAtIndex(int index);
+		void removeHalfNodes();
+
+		Direction getReverseDirection(Direction reference_direction);
+		void reverseNodeDirections();
+		Direction reverse();
 
 		std::vector<sf::Vector2i> getNodesPositionList();
+		sf::Vector2i getNewNodePosition(Node* reference_node, Operation operation);
+		void initializeNode(Node* new_node, Node* reference_node, Operation operation);
+
+		void insertNodeAtHead();
+
 	};
+
 
 }

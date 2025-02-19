@@ -1,5 +1,6 @@
 #include "Player/BodyPart.h"
 #include "Global/Config.h"
+#include "Global/ServiceLocator.h"
 #include "Level/LevelView.h"
 #include "Level/LevelModel.h"
 
@@ -47,7 +48,19 @@ namespace Player {
 		return sf::Vector2f(x_screen_position, y_screen_position);
 	}
 
-	float BodyPart::getRotateAngle() {
+	void BodyPart::setPosition(sf::Vector2i position)
+	{
+		grid_position = position;
+	}
+
+	void BodyPart::setDirection(Direction direction)
+	{
+		previous_direction = this->direction;
+		this->direction = direction;
+	}
+
+	float BodyPart::getRotateAngle()
+	{
 		switch (direction)
 		{
 		case Direction::UP:
@@ -61,10 +74,13 @@ namespace Player {
 		}
 	}
 
-	void BodyPart::setDirection(Direction direction)
+
+
+	Direction BodyPart::getPreviousDirection()
 	{
-		this->direction = direction;
+		return previous_direction;
 	}
+
 
 	void BodyPart::updatePosition()
 	{
@@ -90,6 +106,24 @@ namespace Player {
 			return grid_position;
 		}
 	}
+
+	sf::Vector2i BodyPart::getPrevPosition()
+	{
+		switch (direction)
+		{
+		case Direction::UP:
+			return getNextPositionDown();
+		case Direction::DOWN:
+			return getNextPositionUp();
+		case Direction::RIGHT:
+			return getNextPositionLeft();
+		case Direction::LEFT:
+			return getNextPositionRight();
+		default:
+			return grid_position;
+		}
+	}
+
 	sf::Vector2i BodyPart::getNextPositionDown()
 	{
 		return sf::Vector2i(grid_position.x, (grid_position.y + 1) % (LevelModel::number_of_rows));
@@ -108,11 +142,6 @@ namespace Player {
 	sf::Vector2i BodyPart::getNextPositionLeft()
 	{
 		return sf::Vector2i((grid_position.x - 1 + LevelModel::number_of_columns) % (LevelModel::number_of_columns), grid_position.y);
-	}
-
-	void BodyPart::setPosition(sf::Vector2i position)
-	{
-		grid_position = position;
 	}
 
 	Direction BodyPart::getDirection()

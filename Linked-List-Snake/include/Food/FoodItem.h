@@ -17,6 +17,7 @@ namespace Food {
 		sf::String getFoodTexturePath();
 		sf::Vector2f getFoodImagePosition();
 
+		
 	public:
 		FoodItem();
 		~FoodItem();
@@ -28,6 +29,7 @@ namespace Food {
 		void render();
 
 		FoodType getFoodType();
+		sf::Vector2i getFoodPosition();
 
 	};
 

@@ -1,9 +1,12 @@
 #pragma once 
 #include <vector>
-#include "Element/Obstacle.h"
-#include "Element/ElementData.h"
+#include <SFML/System/Vector2.hpp>
+#include "LinkedList/Node.h"
 
 namespace Element {
+
+	class Obstacle;
+	struct ElementData;
 
 	class ElementService {
 	private:
@@ -20,6 +23,8 @@ namespace Element {
 		void update();
 		void render();
 		std::vector<sf::Vector2i> getElementsPositionList();
+
+		bool processElementsCollision(LinkedList::Node* head_node);
 
 		const void spawnElements(std::vector<ElementData>& element_data_list, float cell_width, float cell_height);
 	};
