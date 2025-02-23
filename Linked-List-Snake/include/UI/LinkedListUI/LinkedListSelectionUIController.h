@@ -15,17 +15,18 @@ namespace UI
 			const float button_width = 400.f;
 			const float button_height = 140.f;
 
-			const float level_one_button_y_position = 500.f;
-			const float level_two_button_y_position = 700.f;
+			const float single_linked_list_button_y_position = 500.f;
+			const float double_linked_list_button_y_position = 700.f;
 			const float menu_button_y_position = 900.f;
 
 			const float background_alpha = 85.f;
 
 			UI::UIElement::ImageView* background_image;
 
-			UI::UIElement::ButtonView* level_one_button;
-			UI::UIElement::ButtonView* level_two_button;
-			UI::UIElement::ButtonView* menu_button;
+			UIElement::ButtonView* single_linked_list_button;
+			UIElement::ButtonView* double_linked_list_button;
+			UIElement::ButtonView* menu_button;
+
 
 			void createImage();
 			void createButtons();
@@ -36,8 +37,8 @@ namespace UI
 			void registerButtonCallback();
 			float calculateLeftOffsetForButton();
 
-			void singleLinkedButtonCallback();
-			void doubleLinkedButtonCallback();
+			void singleLinkedListButtonCallback();
+			void doubleLinkedListButtonCallback();
 
 			void menuButtonCallback();
 
