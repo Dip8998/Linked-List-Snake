@@ -3,6 +3,7 @@
 #include "LinkedListLib/Node.h"
 #include "LinkedListLib/LinkedList.h"
 #include "Food/FoodType.h"
+#include "Level/LevelConfig.h"
 
 namespace Player
 {
@@ -64,8 +65,7 @@ namespace Player
 		InputState current_input_state;
 
 		LinkedListLib::LinkedList* linked_list;
-		void createLinkedList();
-
+		
 		void processPlayerInput();
 		
 		void updateSnakeDirection();
@@ -77,8 +77,6 @@ namespace Player
 		void OnFoodCollected(Food::FoodType food_type);
 		void handleRestart();
 		void reset();
-		void destroy();
-
 
 	public:
 		SnakeController();
@@ -103,6 +101,8 @@ namespace Player
 		void delayedUpdate();
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		bool isSnakeDead();
 	};
 
 }

@@ -36,6 +36,10 @@ namespace Player {
 		initializeLinkedList();
 	}
 
+	void SnakeController::initialize() {
+
+	}
+
 	void SnakeController::initializeLinkedList() {
 
 		float width = Global::ServiceLocator::getInstance()->getLevelService()->getCellWidth();
@@ -277,4 +281,8 @@ namespace Player {
 		return last_linked_list_operation;
 	}
 
+	bool SnakeController::isSnakeDead()
+	{
+		return current_snake_state == SnakeState::DEAD;
+	}
 }

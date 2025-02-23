@@ -26,6 +26,7 @@ namespace Level {
 		void spawnPlayer();
 		void spawnFood();
 		LevelNumber getCurrentLevel();
+		LinkedListType getCurrentLinkedListType();
 		void spawnLevelElements(LevelNumber level_to_load);
 		float getCellWidth();
 		float getCellHeight();
