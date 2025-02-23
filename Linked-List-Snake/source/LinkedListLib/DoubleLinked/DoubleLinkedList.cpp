@@ -230,6 +230,18 @@ namespace LinkedListLib {
 			previous->next = nullptr;
 			delete (cur_node);
 		}
+
+		void DoubleLinkedList::removeAllNodes()
+		{
+			if (head_node == nullptr) return;
+
+			while (head_node != nullptr)
+			{
+				removeNodeAtHead();
+			}
+		}
+
+
 	}
 
 }
