@@ -49,6 +49,30 @@ namespace LinkedListLib {
 
 			head_node = new_node;
 		}
+
+		void DoubleLinkedList::insertNodeAtTail()
+		{
+			linked_list_size++;
+			Node* new_node = createNode();
+			Node* curr_node = head_node;
+
+			if (curr_node == nullptr)
+			{
+				head_node = new_node;
+				static_cast<DoubleNode*>(new_node)->previous = nullptr;
+				initializeNode(new_node, nullptr, Operation::TAIL);
+				return;
+			}
+
+			while (curr_node->next != nullptr)
+			{
+				curr_node = curr_node->next;
+			}
+
+			curr_node->next = new_node;
+			static_cast<DoubleNode*>(new_node)->previous = curr_node;
+			initializeNode(new_node, head_node, Operation::TAIL);
+		}
 	}
 
 }
