@@ -1,4 +1,4 @@
-#include "UI/LevelSelection/LevelSelectionUIController.h"
+#include "UI/LinkedListUI/LinkedListSelectionUIController.h"
 #include "Main/GameService.h"
 #include "Graphics/GraphicService.h"
 #include "Sound/SoundService.h"
@@ -15,40 +15,41 @@ namespace UI
     using namespace Event;
     using namespace Sound;
     using namespace Main;
+    using namespace LinkedListUI;
 
-    namespace LevelSelection
+    namespace LinkedListUI
     {
-        LevelSelectionUIController::LevelSelectionUIController()
+        LinkedListSelectionUIController::LinkedListSelectionUIController()
         {
             createButtons();
             createImage();
         }
 
-        LevelSelectionUIController::~LevelSelectionUIController()
+        LinkedListSelectionUIController::~LinkedListSelectionUIController()
         {
             destroy();
         }
 
-        void LevelSelectionUIController::initialize()
+        void LinkedListSelectionUIController::initialize()
         {
             initializeBackgroundImage();
             initializeButtons();
             registerButtonCallback();
         }
 
-        void LevelSelectionUIController::createImage()
+        void LinkedListSelectionUIController::createImage()
         {
             background_image = new ImageView();
         }
 
-        void LevelSelectionUIController::createButtons()
+        void LinkedListSelectionUIController::createButtons()
         {
             level_one_button = new ButtonView();
             level_two_button = new ButtonView();
             menu_button = new ButtonView();
         }
 
-        void LevelSelectionUIController::initializeBackgroundImage()
+        void LinkedListSelectionUIController::initializeBackgroundImage()
         {
             sf::RenderWindow* game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
 
@@ -56,7 +57,7 @@ namespace UI
             background_image->setImageAlpha(background_alpha);
         }
 
-        void LevelSelectionUIController::initializeButtons()
+        void LinkedListSelectionUIController::initializeButtons()
         {
             float x_position = calculateLeftOffsetForButton();
 
@@ -65,40 +66,42 @@ namespace UI
             menu_button->initialize("Menu Button", Config::menu_button_texture_path, button_width, button_height, sf::Vector2f(x_position, menu_button_y_position));
         }
 
-        void LevelSelectionUIController::registerButtonCallback()
+        void LinkedListSelectionUIController::registerButtonCallback()
         {
-            level_one_button->registerCallbackFuntion(std::bind(&LevelSelectionUIController::levelOneButtonCallback, this));
-            level_two_button->registerCallbackFuntion(std::bind(&LevelSelectionUIController::levelTwoButtonCallback, this));
-            menu_button->registerCallbackFuntion(std::bind(&LevelSelectionUIController::menuButtonCallback, this));
+            level_one_button->registerCallbackFuntion(std::bind(&LinkedListSelectionUIController::singleLinkedButtonCallback, this));
+            level_two_button->registerCallbackFuntion(std::bind(&LinkedListSelectionUIController::doubleLinkedButtonCallback, this));
+            menu_button->registerCallbackFuntion(std::bind(&LinkedListSelectionUIController::menuButtonCallback, this));
         }
 
-        float LevelSelectionUIController::calculateLeftOffsetForButton()
+        float LinkedListSelectionUIController::calculateLeftOffsetForButton()
         {
             sf::RenderWindow* game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
             return (static_cast<float>(game_window->getSize().x) / 2) - button_width / 2;
         }
 
-        void LevelSelectionUIController::levelOneButtonCallback()
+        void LinkedListSelectionUIController::singleLinkedButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::LINKED_LIST_SELECTION);
-            ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::ONE);
+            GameService::setGameState(GameState::GAMEPLAY);
+            //ServiceLocator::getInstance()->getLevelService()->setCurrentLevelNumber(Level::LevelNumber::ONE);
+            //ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::ONE);
         }
 
-        void LevelSelectionUIController::levelTwoButtonCallback()
+        void LinkedListSelectionUIController::doubleLinkedButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::LINKED_LIST_SELECTION);
-            ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::TWO);
+            GameService::setGameState(GameState::GAMEPLAY);
+            //ServiceLocator::getInstance()->getLevelService()->setCurrentLevelNumber(Level::LevelNumber::TWO);
+            //ServiceLocator::getInstance()->getLevelService()->createLevel(Level::LevelNumber::TWO);
         }
 
-        void LevelSelectionUIController::menuButtonCallback()
+        void LinkedListSelectionUIController::menuButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
             GameService::setGameState(GameState::MAIN_MENU);
         }
 
-        void LevelSelectionUIController::update()
+        void LinkedListSelectionUIController::update()
         {
             background_image->update();
             level_one_button->update();
@@ -106,7 +109,7 @@ namespace UI
             menu_button->update();
         }
 
-        void LevelSelectionUIController::render()
+        void LinkedListSelectionUIController::render()
         {
             background_image->render();
             level_one_button->render();
@@ -114,7 +117,7 @@ namespace UI
             menu_button->render();
         }
 
-        void LevelSelectionUIController::show()
+        void LinkedListSelectionUIController::show()
         {
             background_image->show();
             level_one_button->show();
@@ -122,7 +125,7 @@ namespace UI
             menu_button->show();
         }
 
-        void LevelSelectionUIController::destroy()
+        void LinkedListSelectionUIController::destroy()
         {
             delete (background_image);
             delete (level_one_button);
