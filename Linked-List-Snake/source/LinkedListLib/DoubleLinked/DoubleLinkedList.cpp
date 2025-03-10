@@ -9,23 +9,25 @@ namespace LinkedListLib {
 		DoubleLinkedList::~DoubleLinkedList() = default;
 
 
-		void DoubleLinkedList::shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node)
-		{
-			Node* next_node = cur_node;
-			cur_node = new_node;
+		 void DoubleLinkedList::shiftNodesAfterInsertion(Node* new_node, Node* cur_node, Node* prev_node)
+        {
+            Node* next_node = cur_node;
+            cur_node = new_node;
 
-			while (cur_node != nullptr && next_node != nullptr)
-			{
-				cur_node->body_part.setPosition(next_node->body_part.getPosition());
-				cur_node->body_part.setDirection(next_node->body_part.getDirection());
+            while (cur_node != nullptr && next_node != nullptr)
+            {
+                cur_node->body_part.setPosition(next_node->body_part.getPosition());
+                cur_node->body_part.setDirection(next_node->body_part.getDirection());
 
-				prev_node = cur_node;
-				cur_node = next_node;
-				next_node = next_node->next;
-			}
+                prev_node = cur_node;
+                cur_node = next_node;
+                next_node = next_node->next;
+            }
 
-			initializeNode(cur_node, prev_node, Operation::TAIL);
-		}
+            if (cur_node != nullptr) {
+                initializeNode(cur_node, prev_node, Operation::TAIL);
+            }
+        }
 
 		void DoubleLinkedList::removeNodeAt(int index)
 		{
@@ -48,9 +50,12 @@ namespace LinkedListLib {
 			removeNodeAt(midIndex);
 		}
 
+
 		void DoubleLinkedList::removeNodeAtIndex(int index)
 		{
+			if (index < 0 || index >= linked_list_size) return;
 			linked_list_size--;
+
 			int current_index = 0;
 			Node* cur_node = head_node;
 			Node* prev_node = nullptr;
@@ -62,19 +67,16 @@ namespace LinkedListLib {
 				current_index++;
 			}
 
+			if (cur_node == nullptr) return;
+
 			if (prev_node != nullptr)
-			{
 				prev_node->next = cur_node->next;
-			}
 
 			if (cur_node->next != nullptr)
-			{
-				Node* next_node = cur_node->next;
-				static_cast<DoubleNode*>(next_node)->previous = prev_node;
-			}
+				static_cast<DoubleNode*>(cur_node->next)->previous = prev_node;
 
 			shiftNodesAfterRemoval(cur_node);
-			delete(cur_node);
+			delete cur_node;
 		}
 
 		void DoubleLinkedList::shiftNodesAfterRemoval(Node* cur_node)
@@ -137,14 +139,13 @@ namespace LinkedListLib {
 				return;
 			}
 
-			while (curr_node->next != nullptr)
-			{
+			while (curr_node->next != nullptr) {
 				curr_node = curr_node->next;
 			}
 
 			curr_node->next = new_node;
 			static_cast<DoubleNode*>(new_node)->previous = curr_node;
-			initializeNode(new_node, head_node, Operation::TAIL);
+			initializeNode(new_node, curr_node, Operation::TAIL);
 		}
 
 		void DoubleLinkedList::insertNodeAtIndex(int index)
@@ -174,7 +175,7 @@ namespace LinkedListLib {
 			new_node->next = cur_node;
 			static_cast<DoubleNode*>(cur_node)->previous = new_node;
 
-			initializeNode(new_node, prev_node, Operation::TAIL);
+			initializeNode(new_node, head_node, Operation::TAIL);
 			linked_list_size++;
 
 			shiftNodesAfterInsertion(new_node, cur_node, prev_node);
@@ -194,7 +195,9 @@ namespace LinkedListLib {
 
 		}
 
-		void DoubleLinkedList::removeNodeAtHead() {
+		void DoubleLinkedList::removeNodeAtHead()
+		{
+			if (head_node == nullptr) return;
 			linked_list_size--;
 
 			Node* cur_node = head_node;
@@ -204,7 +207,6 @@ namespace LinkedListLib {
 				static_cast<DoubleNode*>(head_node)->previous = nullptr;
 			}
 
-			cur_node->next = nullptr;
 			delete cur_node;
 		}
 
@@ -279,6 +281,9 @@ namespace LinkedListLib {
 			}
 
 			head_node = prev_node;
+
+			if (head_node != nullptr)
+				static_cast<DoubleNode*>(head_node)->previous = nullptr;
 
 			reverseNodeDirections();
 			return head_node->body_part.getDirection();
