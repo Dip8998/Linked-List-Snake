@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
-#include "LinkedList/Node.h"
-#include "LinkedList/SingleLinkedList.h"
+#include "LinkedListLib/Node.h"
+#include "LinkedListLib/LinkedList.h"
 #include "Food/FoodType.h"
+#include "Level/LevelConfig.h"
 
 namespace Player
 {
-	using namespace LinkedList;
+	using namespace LinkedListLib;
 	enum class SnakeState
 	{
 		ALIVE,
@@ -63,9 +64,8 @@ namespace Player
 		Direction current_snake_direction;
 		InputState current_input_state;
 
-		SingleLinkedList* single_linked_list;
-		void createLinkedList();
-
+		LinkedListLib::LinkedList* linked_list;
+		
 		void processPlayerInput();
 		
 		void updateSnakeDirection();
@@ -77,14 +77,15 @@ namespace Player
 		void OnFoodCollected(Food::FoodType food_type);
 		void handleRestart();
 		void reset();
-		void destroy();
-
 
 	public:
 		SnakeController();
 		~SnakeController();
 
 		void initialize();
+		void initializeLinkedList();
+
+		void createLinkedList(Level::LinkedListType level_type);
 		void update();
 		void render();
 
@@ -100,6 +101,8 @@ namespace Player
 		void delayedUpdate();
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		bool isSnakeDead();
 	};
 
 }

@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 #include "SnakeController.h"
+#include "Level/LevelConfig.h"
 
 namespace Player {
 
@@ -20,7 +21,7 @@ namespace Player {
 		void update();
 		void render();
 
-		void spawnPlayer();
+		void spawnPlayer(Level::LinkedListType level_type);
 
 		int getPlayerScore();
 
@@ -28,6 +29,8 @@ namespace Player {
 		TimeComplexity getTimeComplexity();
 
 		std::vector<sf::Vector2i> getCurrentSnakePositionList();
+
+		bool isPlayerDead();
 	};
 
 }
